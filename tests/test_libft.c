@@ -194,7 +194,6 @@ void test_ft_bzero(void)
 		printf("%c", (ft_buffer[i] == '\0') ? '0' : ft_buffer[i] );
 		i++;
 	}
-	printf("\n");
 
 	printf("\nog_buffer: ");
 	i = 0;
@@ -207,6 +206,48 @@ void test_ft_bzero(void)
 	*/
 
 	printf("All bzero tests passed.\n\n");
+}
+
+void test_ft_memcpy(void)
+{
+	unsigned int length = 8, i = 0;
+
+	const char *message = "Hello, World!\0";
+	char ft_buffer[20];
+	char og_buffer[20];
+
+	ft_memcpy(ft_buffer, message, length); 	// Should be "Hello, W"
+	memcpy(og_buffer, message, length); 	// Should be "Hello, W"
+
+	printf("Testing memcpy...\n");
+
+	i = 0;
+	while (i < length)
+	{
+		assert(ft_buffer[i] == og_buffer[i]);
+		i++;
+	}
+
+	/*
+	printf("\nft_buffer: ");
+	i = 0;
+	while (i < length)
+	{
+		printf("%c", ft_buffer[i]);
+		i++;
+	}
+
+	printf("\nog_buffer: ");
+	i = 0;
+	while (i < length)
+	{
+		printf("%c", og_buffer[i]);
+		i++;
+	}
+	printf("\n");
+	*/
+
+	printf("All memcpy tests passed.\n\n");
 }
 
 int main(void)
@@ -222,6 +263,7 @@ int main(void)
 	test_ft_strlen();
 	test_ft_memset();
 	test_ft_bzero();
+	test_ft_memcpy();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");
