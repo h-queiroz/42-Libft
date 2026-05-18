@@ -4,7 +4,7 @@
 #include <stdio.h> 	// printf()
 
 #include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint(), toupper()
-#include <string.h> // strlen(), memset(), bzero(), memcpy(), toupper(), tolower()
+#include <string.h> // strlen(), memset(), bzero(), memcpy(), toupper(), tolower(), strchr(), strrchr()
 
 void test_ft_isalpha(void)
 {
@@ -395,6 +395,37 @@ void test_ft_strchr(void)
 	printf("All strchr tests passed.\n\n");
 }
 
+void test_ft_strrchr(void)
+{
+	typedef struct s_test {
+		char text[100];
+		char search;
+	}	t_test;
+
+	t_test a = {"This is my first test", 't'};
+	t_test b = {"This is my second test", ' '};
+	t_test c = {"Hello World.", '.'};
+	t_test d = {"", 'X'};
+	t_test e = {"Non existing upper x", 'X'};
+	t_test f = {"Break line \n at the middle", '\n'};
+	t_test g = {"Pointing at the terminator", '\0'};
+
+	printf("Testing strrchr...\n");
+
+	// printf("\nMeu: %s\n", ft_strrchr(b.text, b.search));
+	// printf("Og : %s\n\n", strrchr(b.text, b.search));
+
+	assert(ft_strrchr(a.text, a.search)	== strrchr(a.text, a.search));
+	assert(ft_strrchr(b.text, b.search)	== strrchr(b.text, b.search));
+	assert(ft_strrchr(c.text, c.search)	== strrchr(c.text, c.search));
+	assert(ft_strrchr(d.text, d.search)	== strrchr(d.text, d.search));
+	assert(ft_strrchr(e.text, e.search)	== strrchr(e.text, e.search));
+	assert(ft_strrchr(f.text, f.search)	== strrchr(f.text, f.search));
+	assert(ft_strrchr(g.text, g.search)	== strrchr(g.text, g.search));
+
+	printf("All strrchr tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests...\n");
@@ -415,6 +446,7 @@ int main(void)
 	test_ft_toupper();
 	test_ft_tolower();
 	test_ft_strchr();
+	test_ft_strrchr();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");
