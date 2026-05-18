@@ -4,7 +4,7 @@
 #include <stdio.h> 	// printf()
 
 #include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint()
-#include <string.h> // strlen(), memset()
+#include <string.h> // strlen(), memset(), bzero()
 
 void test_ft_isalpha(void)
 {
@@ -159,6 +159,56 @@ void test_ft_memset(void)
 	printf("All memset tests passed.\n\n");
 }
 
+void test_ft_bzero(void)
+{
+	unsigned int length = 20, i = 0;
+	char ft_buffer[length];
+	char og_buffer[length];
+
+	while (i < length)
+	{
+		ft_buffer[i] = 'X';
+		og_buffer[i] = 'X';
+		i++;
+	}
+	ft_buffer[i-1] = '\0';
+	og_buffer[i-1] = '\0';
+
+	ft_bzero(ft_buffer + 3, 10);
+	bzero(og_buffer + 3, 10);
+
+	printf("Testing bzero...\n");
+
+	i = 0;
+	while (i < length)
+	{
+		assert(ft_buffer[i] == og_buffer[i]);
+		i++;
+	}
+
+	/*
+	printf("\nft_buffer: ");
+	i = 0;
+	while (i < length)
+	{
+		printf("%c", (ft_buffer[i] == '\0') ? '0' : ft_buffer[i] );
+		i++;
+	}
+	printf("\n");
+
+	printf("\nog_buffer: ");
+	i = 0;
+	while (i < length)
+	{
+		printf("%c", (og_buffer[i] == '\0') ? '0' : og_buffer[i] );
+		i++;
+	}
+	printf("\n");
+	*/
+
+	printf("All bzero tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests...\n");
@@ -171,6 +221,7 @@ int main(void)
 	test_ft_isprint();
 	test_ft_strlen();
 	test_ft_memset();
+	test_ft_bzero();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");

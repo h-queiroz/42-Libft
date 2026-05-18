@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/17 22:00:52 by hector            #+#    #+#             */
-/*   Updated: 2026/05/17 22:00:53 by hector           ###   ########.fr       */
+/*   Created: 2026/05/17 22:47:09 by hector            #+#    #+#             */
+/*   Updated: 2026/05/17 22:47:11 by hector           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <stdlib.h>
-# include <stddef.h>
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned int	i;
+	char			*x;
 
-int		ft_isalpha(int c);
-int		ft_isdigit(int c);
-int		ft_isalnum(int c);
-int		ft_isascii(int c);
-int		ft_isprint(int c);
-size_t	ft_strlen(const char *s);
-void	*ft_memset(void *s, int c, size_t n);
-void	ft_bzero(void *s, size_t n);
+	x = s;
+	i = 0;
+	while (i < n)
+		x[i++] = '\0';
+}
 
-#endif
+// Simple and dumb alternative
+/*
+void	bzero(void *s, size_t n)
+{
+	ft_memset(s, '\0', n);
+}
+*/
