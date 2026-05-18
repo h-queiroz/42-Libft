@@ -1,7 +1,10 @@
 #include "../libft.h"
+
 #include <assert.h> // assert()
-#include <stdio.h> // printf()
-#include <ctype.h> // isalpha(), isdigit(), isalnum(), isascii(), isprint()
+#include <stdio.h> 	// printf()
+
+#include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint()
+#include <string.h> // strlen()
 
 void test_ft_isalpha(void)
 {
@@ -100,6 +103,29 @@ void test_ft_isprint(void)
 	printf("All isprint tests passed.\n\n");
 }
 
+void test_ft_strlen(void)
+{
+	char *a = "Hello, World!";
+	char *b = "";
+	char *c = "A";
+	char *d = "Supercalifragilisticexpialidocious";
+	char *e = "Before\0After";
+	char *f = "X\0";
+	char *g = " \t\n ";
+
+	printf("Testing strlen...\n");
+
+	assert(ft_strlen(a) == strlen(a));
+	assert(ft_strlen(b) == strlen(b));
+	assert(ft_strlen(c) == strlen(c));
+	assert(ft_strlen(d) == strlen(d));
+	assert(ft_strlen(e) == strlen(e));
+	assert(ft_strlen(f) == strlen(f));
+	assert(ft_strlen(g) == strlen(g));
+
+	printf("All strlen tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests...\n");
@@ -110,6 +136,7 @@ int main(void)
 	test_ft_isalnum();
 	test_ft_isascii();
 	test_ft_isprint();
+	test_ft_strlen();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");
