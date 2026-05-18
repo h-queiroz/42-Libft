@@ -250,6 +250,47 @@ void test_ft_memcpy(void)
 	printf("All memcpy tests passed.\n\n");
 }
 
+void test_ft_memmove(void)
+{
+	unsigned int length = 5, i = 0;
+
+	char ft_buffer[] = "ABCDE";
+	char og_buffer[] = "ABCDE";
+
+	ft_memmove(ft_buffer + 2, ft_buffer, 3);
+	memmove(og_buffer + 2, og_buffer, 3);
+
+	printf("Testing memmove...\n");
+
+	i = 0;
+	while (i < length)
+	{
+		assert(ft_buffer[i] == og_buffer[i]);
+		i++;
+	}
+
+	/*
+	printf("\nft_buffer: ");
+	i = 0;
+	while (i < length)
+	{
+		printf("%c", ft_buffer[i]);
+		i++;
+	}
+
+	printf("\nog_buffer: ");
+	i = 0;
+	while (i < length)
+	{
+		printf("%c", og_buffer[i]);
+		i++;
+	}
+	printf("\n");
+	*/
+
+	printf("All memmove tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests...\n");
@@ -264,6 +305,7 @@ int main(void)
 	test_ft_memset();
 	test_ft_bzero();
 	test_ft_memcpy();
+	test_ft_memmove();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");
