@@ -367,6 +367,34 @@ void test_ft_tolower(void)
 	printf("All tolower tests passed.\n\n");
 }
 
+void test_ft_strchr(void)
+{
+	typedef struct s_test {
+		char text[100];
+		char search;
+	}	t_test;
+
+	t_test a = {"This is my first test", 'm'};
+	t_test b = {"This is my second test", ' '};
+	t_test c = {"Hello World.", '.'};
+	t_test d = {"", 'X'};
+	t_test e = {"Non existing upper x", 'X'};
+	t_test f = {"Break line \n at the middle", '\n'};
+	t_test g = {"Pointing at the terminator", '\0'};
+
+	printf("Testing strchr...\n");
+
+	assert(ft_strchr(a.text, a.search)	== strchr(a.text, a.search));
+	assert(ft_strchr(b.text, b.search)	== strchr(b.text, b.search));
+	assert(ft_strchr(c.text, c.search)	== strchr(c.text, c.search));
+	assert(ft_strchr(d.text, d.search)	== strchr(d.text, d.search));
+	assert(ft_strchr(e.text, e.search)	== strchr(e.text, e.search));
+	assert(ft_strchr(f.text, f.search)	== strchr(f.text, f.search));
+	assert(ft_strchr(g.text, g.search)	== strchr(g.text, g.search));
+
+	printf("All strchr tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests...\n");
@@ -382,8 +410,11 @@ int main(void)
 	test_ft_bzero();
 	test_ft_memcpy();
 	// test_ft_memmove();
+	// test_ft_strlcpy();
+	// test_ft_strlcat();
 	test_ft_toupper();
 	test_ft_tolower();
+	test_ft_strchr();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");
