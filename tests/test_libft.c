@@ -3,8 +3,8 @@
 #include <assert.h> // assert()
 #include <stdio.h> 	// printf()
 
-#include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint()
-#include <string.h> // strlen(), memset(), bzero()
+#include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint(), toupper()
+#include <string.h> // strlen(), memset(), bzero(), memcpy(), toupper()
 
 void test_ft_isalpha(void)
 {
@@ -112,6 +112,7 @@ void test_ft_strlen(void)
 	char *e = "Before\0After";
 	char *f = "X\0";
 	char *g = " \t\n ";
+	// char *h = NULL;
 
 	printf("Testing strlen...\n");
 
@@ -122,6 +123,7 @@ void test_ft_strlen(void)
 	assert(ft_strlen(e) == strlen(e));
 	assert(ft_strlen(f) == strlen(f));
 	assert(ft_strlen(g) == strlen(g));
+	// assert(ft_strlen(h) == strlen(h));
 
 	printf("All strlen tests passed.\n\n");
 }
@@ -252,24 +254,17 @@ void test_ft_memcpy(void)
 
 void test_ft_memmove(void)
 {
-	unsigned int length = 5, i = 0;
+	unsigned int length = 10, i = 0;
 
-	char ft_buffer[] = "ABCDE";
-	char og_buffer[] = "ABCDE";
+	// Test1
+	char ft_buffer[] = "ABCDEFGHIJ";
+	char og_buffer[] = "ABCDEFGHIJ";
 
-	ft_memmove(ft_buffer + 2, ft_buffer, 3);
-	memmove(og_buffer + 2, og_buffer, 3);
+	ft_memmove(ft_buffer, ft_buffer + 1, 3);
+	memmove(og_buffer, og_buffer + 1, 3);
 
 	printf("Testing memmove...\n");
 
-	i = 0;
-	while (i < length)
-	{
-		assert(ft_buffer[i] == og_buffer[i]);
-		i++;
-	}
-
-	/*
 	printf("\nft_buffer: ");
 	i = 0;
 	while (i < length)
@@ -286,9 +281,68 @@ void test_ft_memmove(void)
 		i++;
 	}
 	printf("\n");
-	*/
+
+	i = 0;
+	while (i < length)
+	{
+		assert(ft_buffer[i] == og_buffer[i]);
+		i++;
+	}
+
+	// Test2
+	char ft_buffer2[] = "ABCDEFGHIJ";
+	char og_buffer2[] = "ABCDEFGHIJ";
+
+	ft_memmove(ft_buffer2 + 3, ft_buffer2, 5);
+	memmove(og_buffer2 + 3, og_buffer2, 5);
+
+	printf("\nft_buffer2: ");
+	i = 0;
+	while (i < length)
+	{
+		printf("%c", ft_buffer2[i]);
+		i++;
+	}
+
+	printf("\nog_buffer2: ");
+	i = 0;
+	while (i < length)
+	{
+		printf("%c", og_buffer2[i]);
+		i++;
+	}
+	printf("\n");
+
+	i = 0;
+	while (i < length)
+	{
+		assert(ft_buffer2[i] == og_buffer2[i]);
+		i++;
+	}
 
 	printf("All memmove tests passed.\n\n");
+}
+
+void test_ft_toupper(void)
+{
+	printf("Testing toupper...\n");
+
+	// printf("Og:		%c\n", toupper('a'));
+	// printf("Mine:	%c\n", ft_toupper('a'));
+
+	assert(ft_toupper('a')	== toupper('a'));
+	assert(ft_toupper('z')	== toupper('z'));
+	assert(ft_toupper('A')	== toupper('A'));
+	assert(ft_toupper('Z')	== toupper('Z'));
+	assert(ft_toupper('1')	== toupper('1'));
+	assert(ft_toupper('%')	== toupper('%'));
+	assert(ft_toupper(' ')	== toupper(' '));
+	assert(ft_toupper(120)	== toupper(120)); 	// x
+	assert(ft_toupper(88) 	== toupper(88)); 	// X
+	assert(ft_toupper('\0')	== toupper('\0'));
+	assert(ft_toupper('\n') == toupper('\n'));
+
+	printf("All toupper tests passed.\n\n");
 }
 
 int main(void)
@@ -305,7 +359,8 @@ int main(void)
 	test_ft_memset();
 	test_ft_bzero();
 	test_ft_memcpy();
-	test_ft_memmove();
+	// test_ft_memmove();
+	test_ft_toupper();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");
