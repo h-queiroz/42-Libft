@@ -4,7 +4,7 @@
 #include <stdio.h> 	// printf()
 
 #include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint()
-#include <string.h> // strlen()
+#include <string.h> // strlen(), memset()
 
 void test_ft_isalpha(void)
 {
@@ -126,6 +126,17 @@ void test_ft_strlen(void)
 	printf("All strlen tests passed.\n\n");
 }
 
+void test_ft_memset(void)
+{
+	void *a;
+
+	printf("Testing memset...\n");
+
+	assert(ft_memset(a, 'a', 10) == memset(a, 'a', 10));
+
+	printf("All memset tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests...\n");
@@ -137,6 +148,7 @@ int main(void)
 	test_ft_isascii();
 	test_ft_isprint();
 	test_ft_strlen();
+	test_ft_memset();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");
