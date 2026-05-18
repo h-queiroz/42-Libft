@@ -128,11 +128,33 @@ void test_ft_strlen(void)
 
 void test_ft_memset(void)
 {
-	void *a;
+	unsigned int length = 20, i = 0;
+	char ft_buffer[length];
+	char og_buffer[length];
+
+	while (i < length)
+	{
+		ft_buffer[i] = 'X';
+		og_buffer[i] = 'X';
+		i++;
+	}
+	ft_buffer[i-1] = '\0';
+	og_buffer[i-1] = '\0';
+
+	ft_memset(ft_buffer, 'A', 10);
+	memset(og_buffer, 'A', 10);
 
 	printf("Testing memset...\n");
 
-	assert(ft_memset(a, 'a', 10) == memset(a, 'a', 10));
+	i = 0;
+	while (i < length)
+	{
+		assert(ft_buffer[i] == og_buffer[i]);
+		i++;
+	}
+
+	// printf("\nft_buffer at the end: %s\n", ft_buffer);
+	// printf("og_buffer at the end: %s\n\n", og_buffer);
 
 	printf("All memset tests passed.\n\n");
 }
