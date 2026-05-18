@@ -4,7 +4,7 @@
 #include <stdio.h> 	// printf()
 
 #include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint(), toupper()
-#include <string.h> // strlen(), memset(), bzero(), memcpy(), toupper()
+#include <string.h> // strlen(), memset(), bzero(), memcpy(), toupper(), tolower()
 
 void test_ft_isalpha(void)
 {
@@ -345,6 +345,28 @@ void test_ft_toupper(void)
 	printf("All toupper tests passed.\n\n");
 }
 
+void test_ft_tolower(void)
+{
+	printf("Testing tolower...\n");
+
+	// printf("Og:		%c\n", tolower('a'));
+	// printf("Mine:	%c\n", ft_tolower('a'));
+
+	assert(ft_tolower('a')	== tolower('a'));
+	assert(ft_tolower('z')	== tolower('z'));
+	assert(ft_tolower('A')	== tolower('A'));
+	assert(ft_tolower('Z')	== tolower('Z'));
+	assert(ft_tolower('1')	== tolower('1'));
+	assert(ft_tolower('%')	== tolower('%'));
+	assert(ft_tolower(' ')	== tolower(' '));
+	assert(ft_tolower(120)	== tolower(120)); 	// x
+	assert(ft_tolower(88) 	== tolower(88)); 	// X
+	assert(ft_tolower('\0')	== tolower('\0'));
+	assert(ft_tolower('\n') == tolower('\n'));
+
+	printf("All tolower tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests...\n");
@@ -361,6 +383,7 @@ int main(void)
 	test_ft_memcpy();
 	// test_ft_memmove();
 	test_ft_toupper();
+	test_ft_tolower();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");

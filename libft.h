@@ -6,7 +6,7 @@
 /*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:00:52 by hector            #+#    #+#             */
-/*   Updated: 2026/05/18 15:17:44 by hequeiro         ###   ########.fr       */
+/*   Updated: 2026/05/18 15:43:18 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n); // To finish
 int		ft_toupper(int c);
+int		ft_tolower(int c);
 
 #endif
