@@ -4,7 +4,7 @@
 #include <stdio.h> 	// printf()
 
 #include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint(), toupper()
-#include <string.h> // strlen(), memset(), bzero(), memcpy(), toupper(), tolower(), strchr(), strrchr()
+#include <string.h> // strlen(), memset(), bzero(), memcpy(), toupper(), tolower(), strchr(), strrchr(), strncmp()
 
 void test_ft_isalpha(void)
 {
@@ -426,6 +426,45 @@ void test_ft_strrchr(void)
 	printf("All strrchr tests passed.\n\n");
 }
 
+void test_ft_strncmp(void)
+{
+	typedef struct s_test {
+		char text1[100];
+		char text2[100];
+		unsigned int length;
+	}	t_test;
+
+	t_test a = {"This is my first test", "This is my first test", 100};
+	t_test b = {"This is my second test", "This is my third test", 100};
+	t_test c = {"Hello World.", ".", 1};
+	t_test d = {"", "", 5};
+	t_test e = {"Break line \n at the middle", "", 50};
+	t_test f = {"", "The other test is completely empty", 5};
+	t_test g = {"Non existing upper x", "\0", 10};
+	t_test h = {"\0", "\0", 10};
+	t_test i = {"\0", "\0", 1};
+	t_test j = {"\0", "\0", 0};
+	t_test k = {"This is my second test", "This is my third test", 10};
+	t_test l = {"This is my second test", "This is my third test", 1};
+
+	printf("Testing strncmp...\n");
+
+	assert(ft_strncmp(a.text1, a.text2, a.length)	== strncmp(a.text1, a.text2, a.length));
+	assert(ft_strncmp(b.text1, b.text2, b.length)	== strncmp(b.text1, b.text2, b.length));
+	assert(ft_strncmp(c.text1, c.text2, c.length)	== strncmp(c.text1, c.text2, c.length));
+	assert(ft_strncmp(d.text1, d.text2, d.length)	== strncmp(d.text1, d.text2, d.length));
+	assert(ft_strncmp(e.text1, e.text2, e.length)	== strncmp(e.text1, e.text2, e.length));
+	assert(ft_strncmp(f.text1, f.text2, f.length)	== strncmp(f.text1, f.text2, f.length));
+	assert(ft_strncmp(g.text1, g.text2, g.length)	== strncmp(g.text1, g.text2, g.length));
+	assert(ft_strncmp(h.text1, h.text2, h.length)	== strncmp(h.text1, h.text2, h.length));
+	assert(ft_strncmp(i.text1, i.text2, i.length)	== strncmp(i.text1, i.text2, i.length));
+	assert(ft_strncmp(j.text1, j.text2, j.length)	== strncmp(j.text1, j.text2, j.length));
+	assert(ft_strncmp(k.text1, k.text2, k.length)	== strncmp(k.text1, k.text2, k.length));
+	assert(ft_strncmp(l.text1, l.text2, l.length)	== strncmp(l.text1, l.text2, l.length));
+
+	printf("All strncmp tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests...\n");
@@ -447,6 +486,7 @@ int main(void)
 	test_ft_tolower();
 	test_ft_strchr();
 	test_ft_strrchr();
+	test_ft_strncmp();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");
