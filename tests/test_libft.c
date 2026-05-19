@@ -5,6 +5,7 @@
 
 #include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint(), toupper()
 #include <string.h> // strlen(), memset(), bzero(), memcpy(), toupper(), tolower(), strchr(), strrchr(), strncmp()
+#include <stdlib.h>	// atoi()
 
 void test_ft_isalpha(void)
 {
@@ -465,6 +466,55 @@ void test_ft_strncmp(void)
 	printf("All strncmp tests passed.\n\n");
 }
 
+void test_ft_atoi(void)
+{
+	char *a = "    24";
+	char *b = "35";
+	char *c = "abc47def";
+	char *d = "578def";
+	char *e = "-73";
+	char *f = "+10";
+	char *g = "-9000";
+	char *h = " 	 	+-+-+876";
+	char *i = " 	 \f\n----+-+87abc";
+	char *j = " 	 \f----+-+11+7abc";
+	char *k = "-0";
+	char *l = "+0";
+	char *m = "2147483647";
+	char *n = "-2147483648";
+	char *o = "2147483648";
+	char *p = "-2147483649";
+	char *q = "999999999999999";
+	char *r = "-999999999999999";
+	char *s = "999999999999998";
+	char *t = "-999999999999998";
+
+	printf("Testing atoi...\n");
+
+	assert(ft_atoi(a) == atoi(a));
+	assert(ft_atoi(b) == atoi(b));
+	assert(ft_atoi(c) == atoi(c));
+	assert(ft_atoi(d) == atoi(d));
+	assert(ft_atoi(e) == atoi(e));
+	assert(ft_atoi(f) == atoi(f));
+	assert(ft_atoi(g) == atoi(g));
+	assert(ft_atoi(h) == atoi(h));
+	assert(ft_atoi(i) == atoi(i));
+	assert(ft_atoi(j) == atoi(j));
+	assert(ft_atoi(k) == atoi(k));
+	assert(ft_atoi(l) == atoi(l));
+	assert(ft_atoi(m) == atoi(m));
+	assert(ft_atoi(n) == atoi(n));
+	assert(ft_atoi(o) == atoi(o));
+	assert(ft_atoi(p) == atoi(p));
+	assert(ft_atoi(q) == atoi(q));
+	assert(ft_atoi(r) == atoi(r));
+	assert(ft_atoi(s) == atoi(s));
+	assert(ft_atoi(t) == atoi(t));
+
+	printf("All atoi tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests...\n");
@@ -487,6 +537,7 @@ int main(void)
 	test_ft_strchr();
 	test_ft_strrchr();
 	test_ft_strncmp();
+	test_ft_atoi();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");
