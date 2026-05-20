@@ -20,21 +20,24 @@ int main(void)
 	printf("Initiating tests for Part 3...\n");
 	printf("-------------------\n\n");
 
-	t_list **lista = NULL;
+	t_list *lista = NULL;
+	t_list *first_node;
 	t_list *second_node;
 
-	*lista = ft_lstnew("This is the initial node of my new list");
+	first_node 	= ft_lstnew("This is the initial node of my new list");
 	second_node = ft_lstnew("Second node of the list");
 
-	ft_lstadd_front(lista, second_node);
+	lista = first_node;
 
-	printf("List length so far: %d\n", ft_lstsize(*lista));
-	assert(ft_lstsize(*lista) == 2);
+	ft_lstadd_front(&lista, second_node);
 
-	free(*lista);
+	printf("List length so far: %d\n", ft_lstsize(lista));
+	assert(ft_lstsize(lista) == 2);
+
+	free(first_node);
 	free(second_node);
 
-	printf("-------------------\n");
+	printf("\n-------------------\n");
 	printf("All Part 3 tests passed.\n");
 
 	return 0;
