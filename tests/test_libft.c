@@ -3,8 +3,8 @@
 #include <assert.h> // assert()
 #include <stdio.h> 	// printf()
 
-#include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint(), toupper()
-#include <string.h> // strlen(), memset(), bzero(), memcpy(), toupper(), tolower(), strchr(), strrchr(), strncmp()
+#include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint(), toupper(), tolower()
+#include <string.h> // strlen(), memset(), bzero(), memcpy(), strlcat(), strchr(), strrchr(), strncmp(), strdup()
 #include <stdlib.h>	// atoi()
 
 void test_ft_isalpha(void)
@@ -324,6 +324,68 @@ void test_ft_memmove(void)
 	printf("All memmove tests passed.\n\n");
 }
 
+void test_ft_strlcat(void)
+{
+	printf("Testing strlcat...\n\n");
+
+	char my_dest1[10] = "Hello, ";
+	char og_test1[10] = "Hello, ";
+	const char *src1= "World";
+
+	size_t res1 = ft_strlcat(my_dest1, src1, sizeof(my_dest1));
+	size_t test1 = strlcat(og_test1, src1, sizeof(og_test1));
+
+	// printf("My final result \t\"%s\". Final length: %zu\n", my_dest1, res1);
+	// printf("OG result \t\t\"%s\". Final length: %zu\n", og_test1, test1);
+
+	assert(ft_strncmp(my_dest1, og_test1, 100) == 0);
+	assert(res1 == test1);
+
+	// printf("\n####################\n");
+
+	char my_dest2[10] = "";
+	char og_test2[10] = "";
+	const char *src2= "";
+
+	size_t res2 = ft_strlcat(my_dest2, src2, sizeof(my_dest2));
+	size_t test2 = strlcat(og_test2, src2, sizeof(og_test2));
+
+	// printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest2, res2);
+	// printf("OG result \t\t\"%s\". Final length: %zu\n", og_test2, test2);
+
+	// printf("\n####################\n");
+
+	char my_dest3[10] = "";
+	char og_test3[10] = "";
+	const char *src3= "other empty";
+
+	size_t res3 = ft_strlcat(my_dest3, src3, sizeof(my_dest3));
+	size_t test3 = strlcat(og_test3, src3, sizeof(og_test3));
+
+	// printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest3, res3);
+	// printf("OG result \t\t\"%s\". Final length: %zu\n", og_test3, test3);
+
+	assert(ft_strncmp(my_dest3, og_test3, 100) == 0);
+	assert(res3 == test3);
+
+	// printf("\n####################\n");
+
+	char my_dest4[50] = "src empty";
+	char og_test4[50] = "src empty";
+	const char *src4= "";
+
+	size_t res4 = ft_strlcat(my_dest4, src4, sizeof(my_dest4));
+	size_t test4 = strlcat(og_test4, src4, sizeof(og_test4));
+
+	// printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest4, res4);
+	// printf("OG result \t\t\"%s\". Final length: %zu\n", og_test4, test4);
+
+	assert(ft_strncmp(my_dest4, og_test4, 100) == 0);
+	assert(res4 == test4);
+
+	printf("\nAll strlcat tests passed.\n\n");
+}
+
 void test_ft_toupper(void)
 {
 	printf("Testing toupper...\n");
@@ -515,6 +577,31 @@ void test_ft_atoi(void)
 	printf("All atoi tests passed.\n\n");
 }
 
+void test_ft_strdup(void)
+{
+	const char *a = "This is my first test";
+	const char *b = "";
+	const char c[999999];
+
+	char *my_result_a = ft_strdup(a);
+	char *default_a = strdup(a);
+	char *my_result_b = ft_strdup(b);
+	char *my_result_c = ft_strdup(c);
+
+	printf("Testing strdup...\n");
+
+	assert(strncmp(my_result_a , default_a, 100) == 0);
+	assert(my_result_b == NULL);
+	assert(my_result_c == NULL);
+
+	free(my_result_a);
+	free(my_result_b);
+	free(my_result_c);
+	free(default_a);
+
+	printf("All strdup tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests...\n");
@@ -531,13 +618,14 @@ int main(void)
 	test_ft_memcpy();
 	// test_ft_memmove();
 	// test_ft_strlcpy();
-	// test_ft_strlcat();
+	test_ft_strlcat();
 	test_ft_toupper();
 	test_ft_tolower();
 	test_ft_strchr();
 	test_ft_strrchr();
 	test_ft_strncmp();
 	test_ft_atoi();
+	test_ft_strdup();
 
 	printf("-------------------\n");
 	printf("All tests passed.\n");
