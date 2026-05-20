@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   test_part1.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/19 23:29:05 by hector            #+#    #+#             */
+/*   Updated: 2026/05/20 18:54:58 by hector           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft.h"
 
 #include <assert.h> // assert()
@@ -326,7 +338,7 @@ void test_ft_memmove(void)
 
 void test_ft_strlcat(void)
 {
-	printf("Testing strlcat...\n\n");
+	printf("Testing strlcat...\n");
 
 	char my_dest1[10] = "Hello, ";
 	char og_test1[10] = "Hello, ";
@@ -352,6 +364,9 @@ void test_ft_strlcat(void)
 
 	// printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest2, res2);
 	// printf("OG result \t\t\"%s\". Final length: %zu\n", og_test2, test2);
+
+	assert(ft_strncmp(my_dest2, og_test2, 100) == 0);
+	assert(res2 == test2);
 
 	// printf("\n####################\n");
 
@@ -383,7 +398,7 @@ void test_ft_strlcat(void)
 	assert(ft_strncmp(my_dest4, og_test4, 100) == 0);
 	assert(res4 == test4);
 
-	printf("\nAll strlcat tests passed.\n\n");
+	printf("All strlcat tests passed.\n\n");
 }
 
 void test_ft_toupper(void)
@@ -528,6 +543,48 @@ void test_ft_strncmp(void)
 	printf("All strncmp tests passed.\n\n");
 }
 
+void test_ft_strnstr(void)
+{
+	typedef struct s_test
+	{
+		const char *haystack;
+		const char *needle;
+		unsigned int len;
+	} t_test;
+
+	printf("Testing strnstr...\n");
+
+	t_test t1 = {
+		"This is my first test",
+		"is",
+		100,
+	};
+	char *t1_answer = ft_strnstr(t1.haystack, t1.needle, t1.len);
+	char *t1_og = strstr(t1.haystack, t1.needle);
+	printf("Test 1 my answer: \"%s\"\n", t1_answer);
+	printf("Test 1 OG answer: \"%s\"\n", t1_og);
+	printf("Diferença com OG: %d\n", ft_strncmp(t1_answer, t1_og, t1.len));
+
+	assert(ft_strncmp(t1_answer, t1_og, t1.len) == 0);
+
+	printf("\n###################################\n\n");
+
+	t_test t2 = {
+		"This is my second test",
+		"es",
+		100,
+	};
+	char *t2_answer = ft_strnstr(t2.haystack, t2.needle, t2.len);
+	char *t2_og = strstr(t2.haystack, t2.needle);
+	printf("Test 2 my answer: \"%s\"\n", t2_answer);
+	printf("Test 2 OG answer: \"%s\"\n", t2_og);
+	printf("Diferença com OG: %d\n", ft_strncmp(t2_answer, t2_og, t2.len));
+
+	assert(ft_strncmp(t2_answer, t2_og, t2.len) == 0);
+
+	printf("All strnstr tests passed.\n\n");
+}
+
 void test_ft_atoi(void)
 {
 	char *a = "    24";
@@ -604,8 +661,10 @@ void test_ft_strdup(void)
 
 int main(void)
 {
-	printf("Initiating tests...\n");
+	printf("Initiating tests for Part 1...\n");
 	printf("-------------------\n\n");
+
+	// Part 1
 
 	test_ft_isalpha();
 	test_ft_isdigit();
@@ -624,10 +683,11 @@ int main(void)
 	test_ft_strchr();
 	test_ft_strrchr();
 	test_ft_strncmp();
+	// test_ft_strnstr(); // Wrong results still
 	test_ft_atoi();
 	test_ft_strdup();
 
 	printf("-------------------\n");
-	printf("All tests passed.\n");
+	printf("All Part 1 tests passed.\n");
 	return 0;
 }

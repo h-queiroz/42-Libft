@@ -3,7 +3,7 @@ CFLAGS 	:= -Wall -Wextra -Werror
 
 NAME 	:= libft.a
 
-SRCS 	:= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_atoi.c ft_strdup.c
+SRCS 	:= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_strnstr.c ft_atoi.c ft_strdup.c ft_lstnew.c ft_lstadd_front.c ft_lstsize.c
 OBJS 	:= $(SRCS:.c=.o)
 
 all: $(NAME)
@@ -22,5 +22,8 @@ fclean: clean
 
 re: fclean all
 
-test:
-	make -C tests -f Makefile
+test1:
+	make part1 -C tests -f Makefile
+
+test3:
+	make part3 -C tests -f Makefile
