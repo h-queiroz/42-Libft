@@ -22,6 +22,9 @@ fclean: clean
 
 re: fclean all
 
+tests:
+	make all -C tests -f Makefile
+
 test1:
 	make part1 -C tests -f Makefile
 
