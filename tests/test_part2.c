@@ -6,7 +6,7 @@
 /*   By: hequeiro <hequeiro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 10:36:13 by hequeiro          #+#    #+#             */
-/*   Updated: 2026/05/21 16:08:42 by hequeiro         ###   ########.fr       */
+/*   Updated: 2026/05/21 17:13:56 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,19 @@ void test_ft_putstr_fd(void)
 	printf("All putstr_fd tests passed.\n\n");
 }
 
+void test_ft_putendl_fd(void)
+{
+	printf("Testing putendl_fd...\n");
+
+	int fd = open("test.txt", O_RDWR);
+	printf("FD: %d\n", fd);
+	if (fd > 0)
+		ft_putendl_fd("This is my test", fd);
+	close(fd);
+
+	printf("All putendl_fd tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests for Part 2...\n");
@@ -83,6 +96,7 @@ int main(void)
 	test_ft_strjoin();
 	test_ft_putchar_fd();
 	test_ft_putstr_fd();
+	test_ft_putendl_fd();
 
 	printf("-------------------\n");
 	printf("All Part 2 tests passed.\n");

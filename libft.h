@@ -6,7 +6,7 @@
 /*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:00:52 by hector            #+#    #+#             */
-/*   Updated: 2026/05/21 16:06:27 by hequeiro         ###   ########.fr       */
+/*   Updated: 2026/05/21 17:11:07 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
 
 // Part 3
 
