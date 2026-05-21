@@ -6,14 +6,20 @@
 /*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 18:53:11 by hector            #+#    #+#             */
-/*   Updated: 2026/05/20 20:46:17 by hector           ###   ########.fr       */
+/*   Updated: 2026/05/20 21:53:36 by hector           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h" 	// ft_lstnew(), ft_lstadd_front(), ft_lstsize(), ft_lstlast(), ft_lstadd_back()
+#include "../libft.h" 	// ft_lstnew(), ft_lstadd_front(), ft_lstsize(), ft_lstlast(), ft_lstadd_back(), ft_lstdelone()
 
 #include <assert.h> 	// assert()
 #include <stdio.h> 		// printf()
+#include <string.h>		// strdup()
+
+void	del_content(void *content)
+{
+	free(content);
+}
 
 int main(void)
 {
@@ -26,8 +32,10 @@ int main(void)
 	t_list *third_node;
 
 	// Checagem ft_lstnew()
-	first_node 	= ft_lstnew("This is the initial node of my new list");
-	second_node = ft_lstnew("Second node of the list");
+	char *first_content = ft_strdup("This is the initial node of my new list");
+	first_node 	= ft_lstnew(first_content);
+	char *second_content = ft_strdup("This is the initial node of my new list");
+	second_node = ft_lstnew(second_content);
 
 	initial_node = first_node;
 
@@ -39,20 +47,22 @@ int main(void)
 	assert(ft_lstsize(initial_node) == 2);
 
 	// Checagem ft_lstlast()
-	char *last_node_content = (char *)ft_lstlast(initial_node)->content;
-	printf("Last node content: \"%s\"\n", last_node_content);
-	assert(ft_strncmp(last_node_content, first_node->content, 100) == 0);
+	t_list	*last_node_content = ft_lstlast(initial_node);
+	printf("Last node content: \"%s\"\n", (char *)last_node_content->content);
+	assert(ft_strncmp((char *)last_node_content->content, first_node->content, 100) == 0);
 
 	// Checagem ft_lstadd_back()
-	third_node = ft_lstnew("Third node");
+	char *third_content = ft_strdup("Third node");
+	third_node = ft_lstnew(third_content);
 	ft_lstadd_back(&initial_node, third_node);
-	last_node_content = (char *)ft_lstlast(initial_node)->content;
-	printf("Last node content: \"%s\"\n", last_node_content);
-	assert(ft_strncmp(last_node_content, third_node->content, 100) == 0);
+	last_node_content = ft_lstlast(initial_node);
+	printf("Last node content: \"%s\"\n", (char *)last_node_content->content);
+	assert(ft_strncmp((char *)last_node_content->content, third_node->content, 100) == 0);
 
-	// Cleaning all nodes
-	free(first_node);
-	free(second_node);
+	// Cleaning all nodes with ft_lstdelone()
+	ft_lstdelone(first_node, &del_content);
+	ft_lstdelone(second_node, &del_content);
+	ft_lstdelone(third_node, &del_content);
 
 	printf("\n-------------------\n");
 	printf("All Part 3 tests passed.\n");

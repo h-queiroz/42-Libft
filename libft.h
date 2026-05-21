@@ -6,7 +6,7 @@
 /*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:00:52 by hector            #+#    #+#             */
-/*   Updated: 2026/05/20 20:40:21 by hector           ###   ########.fr       */
+/*   Updated: 2026/05/20 21:29:36 by hector           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void	ft_lstadd_front(t_list **lst, t_list *new);
 int 	ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
+void ft_lstdelone(t_list *lst, void (*del)(void *));
 
 #endif
