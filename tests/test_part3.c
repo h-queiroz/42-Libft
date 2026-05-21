@@ -6,7 +6,7 @@
 /*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 18:53:11 by hector            #+#    #+#             */
-/*   Updated: 2026/05/20 22:38:09 by hector           ###   ########.fr       */
+/*   Updated: 2026/05/21 00:55:54 by hector           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,51 @@ static void	del_content(void *content)
 	free(content);
 }
 
+static void	print_content(void *content)
+{
+	printf("Printing content: %s\n", (char *)content);
+}
+
+static void	*upper_content2(void *content)
+{
+	char *str = (char *)content;
+
+	while (*str)
+	{
+		*str = ft_toupper(*str);
+		str++;
+	}
+	return (content);
+}
+
+void test_ft_lstmap(void)
+{
+	t_list *initial_node = NULL;
+	t_list *first_node;
+	t_list *second_node;
+	t_list *third_node;
+
+	
+	first_node 	= ft_lstnew(ft_strdup("Let them see your weakness and let them see you overcome it."));
+	second_node = ft_lstnew(ft_strdup("One day, you will be old enough to start reading fairytales again."));
+	third_node = ft_lstnew(ft_strdup("The purpose of a storyteller is not to tell you how to think, but to give you questions to think upon."));
+
+	initial_node = first_node;
+
+	ft_lstadd_back(&initial_node, second_node);
+	ft_lstadd_back(&initial_node, third_node);
+
+	printf("Lista 2 antes:\n\n");
+	ft_lstiter(initial_node, &print_content);
+
+	t_list *new_list = ft_lstmap(initial_node, &upper_content2, &del_content);
+	printf("Lista 2 depois:\n\n");
+	ft_lstiter(new_list, &print_content);
+
+	ft_lstclear(&initial_node, &del_content);
+	// ft_lstclear(&new_list, &del_content);
+}
+
 static void	upper_content(void *content)
 {
 	char *str = (char *)content;
@@ -29,11 +74,6 @@ static void	upper_content(void *content)
 		*str = ft_toupper(*str);
 		str++;
 	}
-}
-
-static void	print_content(void *content)
-{
-	printf("Printing content: %s\n", (char *)content);
 }
 
 int main(void)
@@ -85,6 +125,8 @@ int main(void)
 
 	// Cleaning all nodes with ft_lstclear()
 	ft_lstclear(&initial_node, &del_content);
+
+	test_ft_lstmap();
 
 	printf("\n-------------------\n");
 	printf("All Part 3 tests passed.\n");
