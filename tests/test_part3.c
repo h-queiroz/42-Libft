@@ -6,11 +6,11 @@
 /*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 18:53:11 by hector            #+#    #+#             */
-/*   Updated: 2026/05/20 21:53:36 by hector           ###   ########.fr       */
+/*   Updated: 2026/05/20 22:15:02 by hector           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h" 	// ft_lstnew(), ft_lstadd_front(), ft_lstsize(), ft_lstlast(), ft_lstadd_back(), ft_lstdelone()
+#include "../libft.h" 	// ft_lstnew(), ft_lstadd_front(), ft_lstsize(), ft_lstlast(), ft_lstadd_back(), ft_lstdelone(), ft_lstclear()
 
 #include <assert.h> 	// assert()
 #include <stdio.h> 		// printf()
@@ -60,9 +60,12 @@ int main(void)
 	assert(ft_strncmp((char *)last_node_content->content, third_node->content, 100) == 0);
 
 	// Cleaning all nodes with ft_lstdelone()
-	ft_lstdelone(first_node, &del_content);
-	ft_lstdelone(second_node, &del_content);
-	ft_lstdelone(third_node, &del_content);
+	// ft_lstdelone(first_node, &del_content);
+	// ft_lstdelone(second_node, &del_content);
+	// ft_lstdelone(third_node, &del_content);
+
+	// Cleaning all nodes with ft_lstclear()
+	ft_lstclear(&initial_node, &del_content);
 
 	printf("\n-------------------\n");
 	printf("All Part 3 tests passed.\n");
