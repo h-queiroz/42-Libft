@@ -6,7 +6,7 @@
 /*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 22:00:52 by hector            #+#    #+#             */
-/*   Updated: 2026/05/20 22:41:00 by hector           ###   ########.fr       */
+/*   Updated: 2026/05/21 10:04:16 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strdup(const char *s);
 
 // Part 2
 
-
+char	*ft_strjoin(char const *s1, char const *s2);
 
 // Part 3
 
