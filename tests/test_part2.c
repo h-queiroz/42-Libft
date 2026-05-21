@@ -6,7 +6,7 @@
 /*   By: hequeiro <hequeiro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 10:36:13 by hequeiro          #+#    #+#             */
-/*   Updated: 2026/05/21 11:58:30 by hequeiro         ###   ########.fr       */
+/*   Updated: 2026/05/21 13:10:07 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 #include <assert.h> // assert()
 #include <stdio.h> 	// printf()
+
+#include <unistd.h> // write(), read(), close()
+#include <fcntl.h> // open(), O_RDONLY, O_WRONLY, O_RDWR
 
 void test_ft_strjoin(void)
 {
@@ -46,12 +49,26 @@ void test_ft_strjoin(void)
 	printf("All strjoin tests passed.\n\n");
 }
 
+void test_ft_putchar_fd(void)
+{
+	printf("Testing putchar_fd...\n");
+
+	int fd = open("test.txt", O_RDWR);
+	printf("FD: %d\n", fd);
+	if (fd > 0)
+		ft_putchar_fd('x', fd);
+	close(fd);
+
+	printf("All putchar_fd tests passed.\n\n");
+}
+
 int main(void)
 {
 	printf("Initiating tests for Part 2...\n");
 	printf("-------------------\n\n");
 
 	test_ft_strjoin();
+	test_ft_putchar_fd();
 
 	printf("-------------------\n");
 	printf("All Part 2 tests passed.\n");
