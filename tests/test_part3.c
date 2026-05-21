@@ -6,19 +6,34 @@
 /*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 18:53:11 by hector            #+#    #+#             */
-/*   Updated: 2026/05/20 22:15:02 by hector           ###   ########.fr       */
+/*   Updated: 2026/05/20 22:38:09 by hector           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h" 	// ft_lstnew(), ft_lstadd_front(), ft_lstsize(), ft_lstlast(), ft_lstadd_back(), ft_lstdelone(), ft_lstclear()
+#include "../libft.h" 	// ft_lstnew(), ft_lstadd_front(), ft_lstsize(), ft_lstlast(), ft_lstadd_back(), ft_lstdelone(), ft_lstclear(), ft_lstiter()
 
 #include <assert.h> 	// assert()
 #include <stdio.h> 		// printf()
-#include <string.h>		// strdup()
 
-void	del_content(void *content)
+static void	del_content(void *content)
 {
 	free(content);
+}
+
+static void	upper_content(void *content)
+{
+	char *str = (char *)content;
+
+	while (*str)
+	{
+		*str = ft_toupper(*str);
+		str++;
+	}
+}
+
+static void	print_content(void *content)
+{
+	printf("Printing content: %s\n", (char *)content);
 }
 
 int main(void)
@@ -31,33 +46,37 @@ int main(void)
 	t_list *second_node;
 	t_list *third_node;
 
-	// Checagem ft_lstnew()
+	// Checking ft_lstnew()
 	char *first_content = ft_strdup("This is the initial node of my new list");
 	first_node 	= ft_lstnew(first_content);
-	char *second_content = ft_strdup("This is the initial node of my new list");
+	char *second_content = ft_strdup("This is the second node");
 	second_node = ft_lstnew(second_content);
 
 	initial_node = first_node;
 
-	// Checagem ft_lstadd_front()
+	// Checking ft_lstadd_front()
 	ft_lstadd_front(&initial_node, second_node);
 
-	// Checagem ft_lstsize()
+	// Checking ft_lstsize()
 	printf("List length so far: %d\n", ft_lstsize(initial_node));
 	assert(ft_lstsize(initial_node) == 2);
 
-	// Checagem ft_lstlast()
+	// Checking ft_lstlast()
 	t_list	*last_node_content = ft_lstlast(initial_node);
-	printf("Last node content: \"%s\"\n", (char *)last_node_content->content);
+	// printf("Last node content: \"%s\"\n", (char *)last_node_content->content);
 	assert(ft_strncmp((char *)last_node_content->content, first_node->content, 100) == 0);
 
-	// Checagem ft_lstadd_back()
+	// Checking ft_lstadd_back()
 	char *third_content = ft_strdup("Third node");
 	third_node = ft_lstnew(third_content);
 	ft_lstadd_back(&initial_node, third_node);
 	last_node_content = ft_lstlast(initial_node);
-	printf("Last node content: \"%s\"\n", (char *)last_node_content->content);
+	// printf("Last node content: \"%s\"\n", (char *)last_node_content->content);
 	assert(ft_strncmp((char *)last_node_content->content, third_node->content, 100) == 0);
+
+	// Checking ft_lstiter()
+	ft_lstiter(first_node, &upper_content);
+	ft_lstiter(initial_node, &print_content);
 
 	// Cleaning all nodes with ft_lstdelone()
 	// ft_lstdelone(first_node, &del_content);
