@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hequeiro <hequeiro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/21 09:31:00 by hequeiro          #+#    #+#             */
-/*   Updated: 2026/05/25 07:48:48 by hequeiro         ###   ########.fr       */
+/*   Created: 2026/05/25 10:50:42 by hequeiro          #+#    #+#             */
+/*   Updated: 2026/05/25 10:54:15 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char			*result;
-	unsigned int	total_len;
-	unsigned int	s1_len;
-	unsigned int	s2_len;
+	unsigned int		i;
+	const unsigned char	*my_s1;
+	const unsigned char	*my_s2;
 
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	total_len = (s1_len + s2_len);
-	result = malloc((sizeof(char) * total_len) + 1);
-	ft_memcpy(result, s1, s1_len);
-	ft_strlcat(result, s2, (total_len + 1));
-	return (result);
+	my_s1 = s1;
+	my_s2 = s2;
+	i = 0;
+	while (i < n)
+	{
+		if (my_s1[i] != my_s2[i])
+			return (my_s1[i] - my_s2[i]);
+		i++;
+	}
+	return (0);
 }

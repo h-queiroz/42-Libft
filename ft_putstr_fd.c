@@ -6,7 +6,7 @@
 /*   By: hequeiro <hequeiro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/21 15:34:33 by hequeiro          #+#    #+#             */
-/*   Updated: 2026/05/21 16:06:39 by hequeiro         ###   ########.fr       */
+/*   Updated: 2026/05/25 07:48:32 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	unsigned int len;
+	unsigned int	len;
 
 	len = ft_strlen(s);
 	write(fd, s, len);

@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hequeiro <hequeiro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/21 09:31:00 by hequeiro          #+#    #+#             */
-/*   Updated: 2026/05/25 07:48:48 by hequeiro         ###   ########.fr       */
+/*   Created: 2026/05/25 13:21:24 by hequeiro          #+#    #+#             */
+/*   Updated: 2026/05/25 14:28:33 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	char			*result;
-	unsigned int	total_len;
-	unsigned int	s1_len;
-	unsigned int	s2_len;
+	unsigned int	length;
 
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	total_len = (s1_len + s2_len);
-	result = malloc((sizeof(char) * total_len) + 1);
-	ft_memcpy(result, s1, s1_len);
-	ft_strlcat(result, s2, (total_len + 1));
-	return (result);
+	if (!(*little))
+		return ((char *)big);
+	length = ft_strlen(little);
+	while (*big && len > 0)
+	{
+		if (*big == *little && ft_strncmp(big, little, (length - 1)) == 0)
+			return ((char *)big);
+		big++;
+		len--;
+	}
+	return (NULL);
 }

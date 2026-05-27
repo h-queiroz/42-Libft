@@ -55,5 +55,4 @@ Functions with the sole purpose of handling Linked Lists:
 - ft_lstmap
 
 # How to compile and test
-To compile all functions you simply have to be on the root of the project and run the command `make`, which should compile all the functions into a single static library 'libft.a' file, which is gonna be used in the future for the most complex programs and functions.
-After that, you can run the command `make tests` to run the unit tests that are located in the **tests** directory and run the test suite with a couple of examples that I created personally to test each function. You can add your own tests by editing the file **tests_partX.c**.
+To compile all functions you simply have to be on the root of the project and run the command `make`, which should compile all the functions into a single static library file called 'libft.a', which is gonna be used in the future for the most complex programs and functions.

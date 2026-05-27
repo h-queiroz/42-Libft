@@ -6,7 +6,7 @@
 /*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 23:29:05 by hector            #+#    #+#             */
-/*   Updated: 2026/05/20 18:54:58 by hector           ###   ########.fr       */
+/*   Updated: 2026/05/25 14:28:06 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 #include <assert.h> // assert()
 #include <stdio.h> 	// printf()
+#include <string.h> // strlen(), memset(), bzero(), memcpy(), strlcat(), strchr(), strrchr(), strncmp(), strdup()
 
 #include <ctype.h> 	// isalpha(), isdigit(), isalnum(), isascii(), isprint(), toupper(), tolower()
-#include <string.h> // strlen(), memset(), bzero(), memcpy(), strlcat(), strchr(), strrchr(), strncmp(), strdup()
 #include <stdlib.h>	// atoi()
+
+size_t 	strlcpy(char *dst, const char *src, size_t size); 			// For 42 machines where doesn't have it implemented by default
+size_t 	strlcat(char *dst, const char *src, size_t size); 			// For 42 machines where doesn't have it implemented by default
+char 	*strnstr(const char *big, const char *little, size_t len); 	// For 42 machines where doesn't have it implemented by default
 
 void test_ft_isalpha(void)
 {
@@ -269,32 +273,35 @@ void test_ft_memmove(void)
 {
 	unsigned int length = 10, i = 0;
 
+	printf("Testing memmove...\n");
+
 	// Test1
 	char ft_buffer[] = "ABCDEFGHIJ";
 	char og_buffer[] = "ABCDEFGHIJ";
-
+	
 	ft_memmove(ft_buffer, ft_buffer + 1, 3);
 	memmove(og_buffer, og_buffer + 1, 3);
-
-	printf("Testing memmove...\n");
-
-	printf("\nft_buffer: ");
-	i = 0;
-	while (i < length)
-	{
-		printf("%c", ft_buffer[i]);
-		i++;
-	}
-
-	printf("\nog_buffer: ");
-	i = 0;
-	while (i < length)
-	{
-		printf("%c", og_buffer[i]);
-		i++;
-	}
-	printf("\n");
-
+	//
+	// printf("Testing memmove...\n");
+	//
+	// printf("#### Test1 ####");
+	// printf("\nft_buffer: ");
+	// i = 0;
+	// while (i < length)
+	// {
+	// 	printf("%c", ft_buffer[i]);
+	// 	i++;
+	// }
+	//
+	// printf("\nog_buffer: ");
+	// i = 0;
+	// while (i < length)
+	// {
+	// 	printf("%c", og_buffer[i]);
+	// 	i++;
+	// }
+	// printf("\n");
+	//
 	i = 0;
 	while (i < length)
 	{
@@ -309,22 +316,23 @@ void test_ft_memmove(void)
 	ft_memmove(ft_buffer2 + 3, ft_buffer2, 5);
 	memmove(og_buffer2 + 3, og_buffer2, 5);
 
-	printf("\nft_buffer2: ");
-	i = 0;
-	while (i < length)
-	{
-		printf("%c", ft_buffer2[i]);
-		i++;
-	}
-
-	printf("\nog_buffer2: ");
-	i = 0;
-	while (i < length)
-	{
-		printf("%c", og_buffer2[i]);
-		i++;
-	}
-	printf("\n");
+	// printf("#### Test2 ####");
+	// printf("\nft_buffer2: ");
+	// i = 0;
+	// while (i < length)
+	// {
+	// 	printf("%c", ft_buffer2[i]);
+	// 	i++;
+	// }
+	//
+	// printf("\nog_buffer2: ");
+	// i = 0;
+	// while (i < length)
+	// {
+	// 	printf("%c", og_buffer2[i]);
+	// 	i++;
+	// }
+	// printf("\n");
 
 	i = 0;
 	while (i < length)
@@ -333,7 +341,145 @@ void test_ft_memmove(void)
 		i++;
 	}
 
+	// Test3
+	char ft_buffer3[] = "ABCDEFGHIJ";
+	char og_buffer3[] = "ABCDEFGHIJ";
+
+	ft_memmove(ft_buffer3 + 3, ft_buffer3, 0);
+	memmove(og_buffer3 + 3, og_buffer3, 0);
+	//
+	// printf("#### Test3 ####");
+	// printf("\nft_buffer3: ");
+	// i = 0;
+	// while (i < length)
+	// {
+	// 	printf("%c", ft_buffer3[i]);
+	// 	i++;
+	// }
+	//
+	// printf("\nog_buffer3: ");
+	// i = 0;
+	// while (i < length)
+	// {
+	// 	printf("%c", og_buffer3[i]);
+	// 	i++;
+	// }
+	// printf("\n");
+
+	i = 0;
+	while (i < length)
+	{
+		assert(ft_buffer3[i] == og_buffer3[i]);
+		i++;
+	}
+
+	// Test4
+	char ft_buffer4[] = "ABCDEFGHIJ";
+	char og_buffer4[] = "ABCDEFGHIJ";
+
+	ft_memmove(ft_buffer4 + 3, ft_buffer4, 0);
+	memmove(og_buffer4 + 3, og_buffer4, 0);
+	//
+	// printf("#### Test4 ####");
+	// printf("\nft_buffer4: ");
+	// i = 0;
+	// while (i < length)
+	// {
+	// 	printf("%c", ft_buffer4[i]);
+	// 	i++;
+	// }
+	//
+	// printf("\nog_buffer4: ");
+	// i = 0;
+	// while (i < length)
+	// {
+	// 	printf("%c", og_buffer4[i]);
+	// 	i++;
+	// }
+	// printf("\n");
+
+	i = 0;
+	while (i < length)
+	{
+		assert(ft_buffer4[i] == og_buffer4[i]);
+		i++;
+	}
+
 	printf("All memmove tests passed.\n\n");
+}
+
+void test_ft_strlcpy(void)
+{
+	printf("Testing strlcpy...\n");
+
+	int i;
+
+	// Test1
+	printf("\n##### Test1 #####\n");
+	const char *src = "This is my test";
+	char ft_dst[100];
+	char og_dst[100];
+
+	// printf("My return: %zu\n", ft_strlcpy(ft_dst, src, 10));
+	// printf("My return: %zu\n", strlcpy(og_dst, src, 10));
+
+	assert(ft_strlcpy(ft_dst, src, 10) == strlcpy(og_dst, src, 10));
+
+	// printf("My dst at the end \"%s\"\n", ft_dst);
+	// printf("OG dst at the end \"%s\"\n", og_dst);
+
+	i = 0;
+	while (i < 10)
+	{
+		assert(ft_dst[i] == og_dst[i]);
+		i++;
+	}
+
+	// Test2
+	printf("\n##### Test2 #####\n");
+	const char *src2 = "";
+	char ft_dst2[100];
+	char og_dst2[100];
+
+	// printf("My return: %zu\n", ft_strlcpy(ft_dst2, src2, 10));
+	// printf("My return: %zu\n", strlcpy(og_dst2, src2, 10));
+
+	assert(ft_strlcpy(ft_dst2, src2, 10) == strlcpy(og_dst2, src2, 10));
+
+	// printf("My dst2 at the end \"%s\"\n", ft_dst2);
+	// printf("OG dst2 at the end \"%s\"\n", og_dst2);
+
+	i = 0;
+	while (ft_dst2[i] && og_dst2[i])
+	{
+		assert(ft_dst2[i] == og_dst2[i]);
+		i++;
+	}
+	assert(ft_dst2[i] == og_dst2[i]);
+
+	// Test3
+	printf("\n##### Test3 #####\n");
+	const char *src3 = "This is my third test";
+	char ft_dst3[100];
+	char og_dst3[100];
+
+	// printf("My return: %zu\n", ft_strlcpy(ft_dst3, src3, 10));
+	// printf("My return: %zu\n", strlcpy(og_dst3, src3, 10));
+
+	assert(ft_strlcpy(ft_dst3, src3, 50) == strlcpy(og_dst3, src3, 50));
+
+	// printf("My dst3 at the end \"%s\"\n", ft_dst3);
+	// printf("OG dst3 at the end \"%s\"\n", og_dst3);
+
+	i = 0;
+	while (ft_dst3[i] && og_dst3[i] && i < 50)
+	{
+		assert(ft_dst3[i] == og_dst3[i]);
+		i++;
+	}
+	assert(ft_dst3[i] == og_dst3[i]);
+
+	printf("All strlcpy tests passed.\n\n");
 }
 
 void test_ft_strlcat(void)
@@ -524,6 +670,8 @@ void test_ft_strncmp(void)
 	t_test j = {"\0", "\0", 0};
 	t_test k = {"This is my second test", "This is my third test", 10};
 	t_test l = {"This is my second test", "This is my third test", 1};
+	t_test m = {"1234", "1235", 5};
+	t_test n = {"", "", 1};
 
 	printf("Testing strncmp...\n");
 
@@ -540,7 +688,117 @@ void test_ft_strncmp(void)
 	assert(ft_strncmp(k.text1, k.text2, k.length)	== strncmp(k.text1, k.text2, k.length));
 	assert(ft_strncmp(l.text1, l.text2, l.length)	== strncmp(l.text1, l.text2, l.length));
 
+	// printf("Meu retorno: %d\n", ft_strncmp(m.text1, m.text2, m.length));
+	// printf("Retorno OG: %d\n", strncmp(m.text1, m.text2, m.length));
+	assert(ft_strncmp(m.text1, m.text2, m.length)	== strncmp(m.text1, m.text2, m.length));
+
+	// printf("Meu retorno: %d\n", ft_strncmp(n.text1, n.text2, n.length));
+	// printf("Retorno OG: %d\n", strncmp(n.text1, n.text2, n.length));
+	assert(ft_strncmp(n.text1, n.text2, n.length)	== strncmp(n.text1, n.text2, n.length));
+
 	printf("All strncmp tests passed.\n\n");
+}
+
+void test_ft_memchr(void)
+{
+	printf("Testing memchr...\n");
+
+	typedef struct	s_test {
+		const char *s;
+		char c;
+		size_t n;
+	}				t_test;
+
+	t_test a = { "This is a test", 't', 10 };
+	t_test b = { "This is a test", 't', 11 };
+	t_test c = { "", 'X', 10 };
+	t_test d = { "all lowercase", 'A', 100 };
+	t_test e = { "Zeroes", 'Z', 0 };
+	t_test f = { "Null-Terminated", '\0', 50 };
+	t_test g = { "Common Text", 'm', 50 };
+
+	// printf("\n#########Test1#########\n");
+	// printf("FT exit: \"%s\"\n", (char *)ft_memchr(a.s, a.c, a.n));
+	// printf("OG exit: \"%s\"\n", (char *)memchr(a.s, a.c, a.n));
+	assert(ft_memchr(a.s, a.c, a.n) == memchr(a.s, a.c, a.n));
+
+	// printf("\n#########Test2#########\n");
+	// printf("FT exit: \"%s\"\n", (char *)ft_memchr(b.s, b.c, b.n));
+	// printf("OG exit: \"%s\"\n", (char *)memchr(b.s, b.c, b.n));
+	assert(ft_memchr(b.s, b.c, b.n) == memchr(b.s, b.c, b.n));
+
+	// printf("\n#########Test3#########\n");
+	// printf("FT exit: \"%s\"\n", (char *)ft_memchr(c.s, c.c, c.n));
+	// printf("OG exit: \"%s\"\n", (char *)memchr(c.s, c.c, c.n));
+	assert(ft_memchr(c.s, c.c, c.n) == memchr(c.s, c.c, c.n));
+
+	// printf("\n#########Test4#########\n");
+	// printf("FT exit: \"%s\"\n", (char *)ft_memchr(d.s, d.c, d.n));
+	// printf("OG exit: \"%s\"\n", (char *)memchr(d.s, d.c, d.n));
+	assert(ft_memchr(d.s, d.c, d.n) == memchr(d.s, d.c, d.n));
+
+	// printf("\n#########Test5#########\n");
+	// printf("FT exit: \"%s\"\n", (char *)ft_memchr(e.s, e.c, e.n));
+	// printf("OG exit: \"%s\"\n", (char *)memchr(e.s, e.c, e.n));
+	assert(ft_memchr(e.s, e.c, e.n) == memchr(e.s, e.c, e.n));
+
+	// printf("\n#########Test6#########\n");
+	// printf("FT exit: \"%s\"\n", (char *)ft_memchr(f.s, f.c, f.n));
+	// printf("OG exit: \"%s\"\n", (char *)memchr(f.s, f.c, f.n));
+	assert(ft_memchr(f.s, f.c, f.n) == memchr(f.s, f.c, f.n));
+
+	// printf("\n#########Test7#########\n");
+	// printf("FT exit: \"%s\"\n", (char *)ft_memchr(g.s, g.c, g.n));
+	// printf("OG exit: \"%s\"\n", (char *)memchr(g.s, g.c, g.n));
+	assert(ft_memchr(g.s, g.c, g.n) == memchr(g.s, g.c, g.n));
+
+	// printf("\n#########Test8#########\n");
+	char s[] = {0, 1, 2, 3, 4, 5};
+	unsigned char my_char = (unsigned char)(2 + 256);
+	// printf("FT exit: \"%s\"\n", (char *)ft_memchr(s, my_char, 3));
+	// printf("OG exit: \"%s\"\n", (char *)memchr(s, my_char, 3));
+	assert(ft_memchr(s, my_char, 3) == memchr(s, my_char, 3));
+
+	printf("All memchr tests passed.\n\n");
+}
+void test_ft_memcmp(void)
+{
+	typedef struct s_test {
+		char text1[100];
+		char text2[100];
+		unsigned int length;
+	}	t_test;
+
+	t_test a = {"This is my first test", "This is my first test", 100};
+	t_test b = {"This is my second test", "This is my third test", 100};
+	t_test c = {"Hello World.", ".", 1};
+	t_test d = {"", "", 5};
+	t_test e = {"Break line \n at the middle", "", 50};
+	t_test f = {"", "The other test is completely empty", 5};
+	t_test g = {"Non existing upper x", "\0", 10};
+	t_test h = {"\0", "\0", 10};
+	t_test i = {"\0", "\0", 1};
+	t_test j = {"\0", "\0", 0};
+	t_test k = {"This is my second test", "This is my third test", 10};
+	t_test l = {"This is my second test", "This is my third test", 1};
+
+	printf("Testing memcmp...\n");
+
+	assert(ft_memcmp(a.text1, a.text2, a.length)	== memcmp(a.text1, a.text2, a.length));
+	assert(ft_memcmp(b.text1, b.text2, b.length)	== memcmp(b.text1, b.text2, b.length));
+	assert(ft_memcmp(c.text1, c.text2, c.length)	== memcmp(c.text1, c.text2, c.length));
+	assert(ft_memcmp(d.text1, d.text2, d.length)	== memcmp(d.text1, d.text2, d.length));
+	assert(ft_memcmp(e.text1, e.text2, e.length)	== memcmp(e.text1, e.text2, e.length));
+	assert(ft_memcmp(f.text1, f.text2, f.length)	== memcmp(f.text1, f.text2, f.length));
+	assert(ft_memcmp(g.text1, g.text2, g.length)	== memcmp(g.text1, g.text2, g.length));
+	assert(ft_memcmp(h.text1, h.text2, h.length)	== memcmp(h.text1, h.text2, h.length));
+	assert(ft_memcmp(i.text1, i.text2, i.length)	== memcmp(i.text1, i.text2, i.length));
+	assert(ft_memcmp(j.text1, j.text2, j.length)	== memcmp(j.text1, j.text2, j.length));
+	assert(ft_memcmp(k.text1, k.text2, k.length)	== memcmp(k.text1, k.text2, k.length));
+	assert(ft_memcmp(l.text1, l.text2, l.length)	== memcmp(l.text1, l.text2, l.length));
+
+	printf("All memcmp tests passed.\n\n");
+
 }
 
 void test_ft_strnstr(void)
@@ -560,14 +818,15 @@ void test_ft_strnstr(void)
 		100,
 	};
 	char *t1_answer = ft_strnstr(t1.haystack, t1.needle, t1.len);
-	char *t1_og = strstr(t1.haystack, t1.needle);
-	printf("Test 1 my answer: \"%s\"\n", t1_answer);
-	printf("Test 1 OG answer: \"%s\"\n", t1_og);
-	printf("Diferença com OG: %d\n", ft_strncmp(t1_answer, t1_og, t1.len));
+	char *t1_og = strnstr(t1.haystack, t1.needle, t1.len);
+	// printf("Test 1 my answer: \"%s\"\n", t1_answer);
+	// printf("Test 1 OG answer: \"%s\"\n", t1_og);
+	// printf("Diferença com OG: %d\n", ft_strncmp(t1_answer, t1_og, t1.len));
 
 	assert(ft_strncmp(t1_answer, t1_og, t1.len) == 0);
+	assert(t1_answer == t1_og);
 
-	printf("\n###################################\n\n");
+	// printf("\n###################################\n\n");
 
 	t_test t2 = {
 		"This is my second test",
@@ -575,12 +834,43 @@ void test_ft_strnstr(void)
 		100,
 	};
 	char *t2_answer = ft_strnstr(t2.haystack, t2.needle, t2.len);
-	char *t2_og = strstr(t2.haystack, t2.needle);
-	printf("Test 2 my answer: \"%s\"\n", t2_answer);
-	printf("Test 2 OG answer: \"%s\"\n", t2_og);
-	printf("Diferença com OG: %d\n", ft_strncmp(t2_answer, t2_og, t2.len));
+	char *t2_og = strnstr(t2.haystack, t2.needle, t2.len);
+	// printf("Test 2 my answer: \"%s\"\n", t2_answer);
+	// printf("Test 2 OG answer: \"%s\"\n", t2_og);
+	// printf("Diferença com OG: %d\n", ft_strncmp(t2_answer, t2_og, t2.len));
 
 	assert(ft_strncmp(t2_answer, t2_og, t2.len) == 0);
+	assert(t2_answer == t2_og);
+
+	// printf("\n###################################\n\n");
+
+	t_test t3 = {
+		"This is my third test",
+		"XXXX",
+		100,
+	};
+	char *t3_answer = ft_strnstr(t3.haystack, t3.needle, t3.len);
+	char *t3_og = strnstr(t3.haystack, t3.needle, t3.len);
+	// printf("Test 3 my answer: \"%s\"\n", t3_answer);
+	// printf("Test 3 OG answer: \"%s\"\n", t3_og);
+
+	assert(t3_answer == t3_og);
+
+	// printf("\n###################################\n\n");
+
+	t_test t4 = {
+		"This is my fourth test",
+		"",
+		100,
+	};
+	char *t4_answer = ft_strnstr(t4.haystack, t4.needle, t4.len);
+	char *t4_og = strnstr(t4.haystack, t4.needle, t4.len);
+	// printf("Test 4 my answer: \"%s\"\n", t4_answer);
+	// printf("Test 4 OG answer: \"%s\"\n", t4_og);
+	// printf("Diferença com OG: %d\n", ft_strncmp(t4_answer, t4_og, t4.len));
+
+	assert(ft_strncmp(t4_answer, t4_og, t4.len) == 0);
+	assert(t4_answer == t4_og);
 
 	printf("All strnstr tests passed.\n\n");
 }
@@ -664,8 +954,6 @@ int main(void)
 	printf("Initiating tests for Part 1...\n");
 	printf("-------------------\n\n");
 
-	// Part 1
-
 	test_ft_isalpha();
 	test_ft_isdigit();
 	test_ft_isalnum();
@@ -675,15 +963,17 @@ int main(void)
 	test_ft_memset();
 	test_ft_bzero();
 	test_ft_memcpy();
-	// test_ft_memmove();
-	// test_ft_strlcpy();
+	test_ft_memmove();
+	test_ft_strlcpy();
 	test_ft_strlcat();
 	test_ft_toupper();
 	test_ft_tolower();
 	test_ft_strchr();
 	test_ft_strrchr();
 	test_ft_strncmp();
-	// test_ft_strnstr(); // Wrong results still
+	test_ft_memchr();
+	test_ft_memcmp();
+	test_ft_strnstr(); // Wrong results still
 	test_ft_atoi();
 	test_ft_strdup();
 

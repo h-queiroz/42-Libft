@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hequeiro <hequeiro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/21 09:31:00 by hequeiro          #+#    #+#             */
-/*   Updated: 2026/05/25 07:48:48 by hequeiro         ###   ########.fr       */
+/*   Created: 2026/05/25 09:24:24 by hequeiro          #+#    #+#             */
+/*   Updated: 2026/05/25 09:54:25 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	char			*result;
-	unsigned int	total_len;
-	unsigned int	s1_len;
-	unsigned int	s2_len;
+	unsigned int	i;
 
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	total_len = (s1_len + s2_len);
-	result = malloc((sizeof(char) * total_len) + 1);
-	ft_memcpy(result, s1, s1_len);
-	ft_strlcat(result, s2, (total_len + 1));
-	return (result);
+	i = 0;
+	while (i < (size - 1) && *src)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }

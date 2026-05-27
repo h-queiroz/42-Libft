@@ -21,11 +21,11 @@ char	*ft_strrchr(const char *s, int c)
 		s++;
 	while (s != starting_point)
 	{
-		if (*s == c)
+		if (*s == (unsigned char)c)
 			return ((char *)s);
 		s--;
 	}
-	if (*starting_point == c)
+	if (*starting_point == (unsigned char)c)
 		return ((char *)s);
 	return (NULL);
 }
