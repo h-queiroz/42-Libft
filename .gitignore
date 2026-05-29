@@ -1,3 +1,5 @@
 *.o
 libft.a
 tests/part*_runner
+libftTester/
+war-machine/

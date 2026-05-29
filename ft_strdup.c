@@ -18,13 +18,19 @@ char	*ft_strdup(const char *s)
 	unsigned int	length;
 	char			*result;
 
-	i = 0;
 	length = ft_strlen(s);
-	if (length <= 0)
-		return (NULL);
-	result = malloc(sizeof(char) * length + 1);
+	if (length == 0)
+	{
+		result = malloc(sizeof(char));
+		if (!result)
+			return (NULL);
+		*result = '\0';
+		return (result);
+	}
+	result = malloc(sizeof(char) * (length + 1));
 	if (!result)
 		return (NULL);
+	i = 0;
 	while (s[i])
 	{
 		result[i] = s[i];
