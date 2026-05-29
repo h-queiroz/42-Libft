@@ -23,17 +23,12 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	new_list = NULL;
 	while (lst != NULL)
 	{
-		// printf("\n******************\n");
-		// printf("Printing content: %s\n", (char *)lst->content);
-		// printf("******************\n\n");
-
 		new_node = ft_lstnew(f(lst->content));
 		if (!new_node)
 		{
 			del(new_node->content);
 			ft_lstclear(&new_list, del);
-			new_list = NULL;
-			break;
+			return (NULL);
 		}
 		if (new_list == NULL)
 		{

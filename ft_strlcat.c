@@ -3,34 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hector <hequeiro@student.42sp.org.br>      +#+  +:+       +#+        */
+/*   By: hequeiro <hequeiro@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/19 20:51:14 by hector            #+#    #+#             */
-/*   Updated: 2026/05/25 09:36:17 by hequeiro         ###   ########.fr       */
+/*   Created: 2026/05/27 19:24:31 by hequeiro          #+#    #+#             */
+/*   Updated: 2026/05/27 19:59:34 by hequeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// Size = 0
+
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	unsigned int	len_dst;
-	unsigned int	len_src;
-	unsigned int	iterator;
+	unsigned int	dst_len;
+	unsigned int	src_len;
+	size_t			counter;
 
-	len_dst = ft_strlen(dst);
-	len_src = ft_strlen(src);
-	if (size <= len_dst)
-		return (size + len_src);
-	while (*dst)
-		dst++;
-	iterator = 0;
-	while (*src && (len_dst + iterator) < (size - 1))
+	dst_len = ft_strlen(dst);
+	src_len = ft_strlen(src);
+	counter = dst_len;
+	if (size <= dst_len)
+		return (size + src_len);
+	while (*src && counter < (size - 1))
 	{
-		*(dst + iterator) = *src;
+		*(dst + dst_len) = *src;
+		dst++;
 		src++;
-		iterator++;
+		counter++;
 	}
-	*(dst + iterator) = '\0';
-	return (len_dst + len_src);
+	*(dst + dst_len) = '\0';
+	return (dst_len + src_len);
 }

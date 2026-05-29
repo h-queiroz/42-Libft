@@ -18,15 +18,9 @@ char	*ft_strdup(const char *s)
 	unsigned int	length;
 	char			*result;
 
+	if (s == NULL && s[0] == '\0')
+		return (NULL);
 	length = ft_strlen(s);
-	if (length == 0)
-	{
-		result = malloc(sizeof(char));
-		if (!result)
-			return (NULL);
-		*result = '\0';
-		return (result);
-	}
 	result = malloc(sizeof(char) * (length + 1));
 	if (!result)
 		return (NULL);

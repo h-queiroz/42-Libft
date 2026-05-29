@@ -493,13 +493,13 @@ void test_ft_strlcat(void)
 	size_t res1 = ft_strlcat(my_dest1, src1, sizeof(my_dest1));
 	size_t test1 = strlcat(og_test1, src1, sizeof(og_test1));
 
-	// printf("My final result \t\"%s\". Final length: %zu\n", my_dest1, res1);
-	// printf("OG result \t\t\"%s\". Final length: %zu\n", og_test1, test1);
+	printf("My final result \t\"%s\". Final length: %zu\n", my_dest1, res1);
+	printf("OG result \t\t\"%s\". Final length: %zu\n", og_test1, test1);
 
 	assert(ft_strncmp(my_dest1, og_test1, 100) == 0);
 	assert(res1 == test1);
 
-	// printf("\n####################\n");
+	printf("\n####################\n");
 
 	char my_dest2[10] = "";
 	char og_test2[10] = "";
@@ -508,13 +508,13 @@ void test_ft_strlcat(void)
 	size_t res2 = ft_strlcat(my_dest2, src2, sizeof(my_dest2));
 	size_t test2 = strlcat(og_test2, src2, sizeof(og_test2));
 
-	// printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest2, res2);
-	// printf("OG result \t\t\"%s\". Final length: %zu\n", og_test2, test2);
+	printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest2, res2);
+	printf("OG result \t\t\"%s\". Final length: %zu\n", og_test2, test2);
 
 	assert(ft_strncmp(my_dest2, og_test2, 100) == 0);
 	assert(res2 == test2);
 
-	// printf("\n####################\n");
+	printf("\n####################\n");
 
 	char my_dest3[10] = "";
 	char og_test3[10] = "";
@@ -523,13 +523,13 @@ void test_ft_strlcat(void)
 	size_t res3 = ft_strlcat(my_dest3, src3, sizeof(my_dest3));
 	size_t test3 = strlcat(og_test3, src3, sizeof(og_test3));
 
-	// printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest3, res3);
-	// printf("OG result \t\t\"%s\". Final length: %zu\n", og_test3, test3);
+	printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest3, res3);
+	printf("OG result \t\t\"%s\". Final length: %zu\n", og_test3, test3);
 
 	assert(ft_strncmp(my_dest3, og_test3, 100) == 0);
 	assert(res3 == test3);
 
-	// printf("\n####################\n");
+	printf("\n####################\n");
 
 	char my_dest4[50] = "src empty";
 	char og_test4[50] = "src empty";
@@ -538,11 +538,45 @@ void test_ft_strlcat(void)
 	size_t res4 = ft_strlcat(my_dest4, src4, sizeof(my_dest4));
 	size_t test4 = strlcat(og_test4, src4, sizeof(og_test4));
 
-	// printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest4, res4);
-	// printf("OG result \t\t\"%s\". Final length: %zu\n", og_test4, test4);
+	printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest4, res4);
+	printf("OG result \t\t\"%s\". Final length: %zu\n", og_test4, test4);
 
 	assert(ft_strncmp(my_dest4, og_test4, 100) == 0);
 	assert(res4 == test4);
+
+	printf("\n####################\n");
+
+	char my_dest5[30]; ft_memset(my_dest5, 0, 30);
+	char og_dest5[30]; ft_memset(og_dest5, 0, 30);
+	const char *src5 = (char *)"AAAAAAAAA";
+	my_dest5[0] = 'B';
+	og_dest5[0] = 'B';
+
+	size_t res5 = ft_strlcat(my_dest5, src5, sizeof(my_dest5));
+	size_t test5 = strlcat(og_dest5, src5, sizeof(og_dest5));
+
+	printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest5, res5);
+	printf("OG result \t\t\"%s\". Final length: %zu\n", og_dest5, test5);
+
+	assert(ft_strncmp(my_dest5, og_dest5, 100) == 0);
+	assert(res5 == test5);
+
+	printf("\n####################\n");
+
+	char my_dest6[10]; 
+	char og_dest6[10];
+	const char *src6 = (char *)"lorem ipsum dolor sit amet";
+	my_dest6[0] = 'a';
+	og_dest6[0] = 'a';
+
+	size_t res6 = ft_strlcat(my_dest6, src6, 0);
+	size_t test6 = strlcat(og_dest6, src6, 0);
+
+	printf("\nMy final result \t\"%s\". Final length: %zu\n", my_dest6, res6);
+	printf("OG result \t\t\"%s\". Final length: %zu\n", og_dest6, test6);
+
+	assert(ft_strncmp(my_dest6, og_dest6, 100) == 0);
+	assert(res6 == test6);
 
 	printf("All strlcat tests passed.\n\n");
 }
@@ -929,22 +963,29 @@ void test_ft_strdup(void)
 	const char *a = "This is my first test";
 	const char *b = "";
 	const char c[999999];
+	const char *d = NULL;
 
 	char *my_result_a = ft_strdup(a);
 	char *default_a = strdup(a);
 	char *my_result_b = ft_strdup(b);
+	char *default_b = strdup(b);
 	char *my_result_c = ft_strdup(c);
+	char *my_result_d = ft_strdup(d);
 
 	printf("Testing strdup...\n");
 
 	assert(strncmp(my_result_a , default_a, 100) == 0);
-	assert(my_result_b == NULL);
+	assert(my_result_b[0] == '\0');
+	assert(my_result_b[0] == default_b[0]);
 	assert(my_result_c == NULL);
+	assert(my_result_d == NULL);
 
 	free(my_result_a);
 	free(my_result_b);
 	free(my_result_c);
+	free(my_result_d);
 	free(default_a);
+	free(default_b);
 
 	printf("All strdup tests passed.\n\n");
 }
